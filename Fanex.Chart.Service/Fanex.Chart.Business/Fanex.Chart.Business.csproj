@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\robert.tran\.nuget\packages\fanex.mailstation\2.1.2\contentFiles\any\net9.0\app.config.transform" />
+    <Content Remove="C:\Users\robert.tran\.nuget\packages\fanex.mailstation\2.1.2\contentFiles\any\net9.0\appsettings.json" />
+    <Content Remove="C:\Users\robert.tran\.nuget\packages\fanex.mailstation\2.1.2\contentFiles\any\net9.0\web.config.transform" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="7.5.2" />
+    <PackageReference Include="Fanex.Data" Version="4.3.2" />
+    <PackageReference Include="Fanex.Data.Repository" Version="4.3.2" />
+    <PackageReference Include="Fanex.LetstalkService.Client" Version="2.0.0" />
+    <PackageReference Include="Fanex.Logging" Version="2.0.2" />
+    <PackageReference Include="Fanex.Logging.Extensions" Version="1.1.0" />
+    <PackageReference Include="Fanex.Logging.Extensions.Database" Version="1.1.0" />
+    <PackageReference Include="Fanex.Logging.Sentry.RavenClient" Version="2.0.2" />
+    <PackageReference Include="Fanex.MailStation" Version="2.1.2" />
+    <PackageReference Include="FreeSpire.XLS" Version="14.2.0" />
+    <PackageReference Include="LiveCharts.Core" Version="0.9.8" />
+    <PackageReference Include="LiveCharts.NetCore" Version="0.9.8" />
+    <PackageReference Include="LiveChartsCore.SkiaSharpView" Version="2.0.0-rc5.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.5" />
+    <PackageReference Include="SkiaSharp" Version="3.116.1" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.88.8" />
+  </ItemGroup>
+</Project>
