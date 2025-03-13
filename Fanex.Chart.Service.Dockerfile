@@ -1,13 +1,14 @@
-# ARG CI_REGISTRY_IMAGE
-# FROM $CI_REGISTRY_IMAGE:builder as deps
-# RUN mkdir -p /src/packages
+ARG CI_REGISTRY_IMAGE
+FROM $CI_REGISTRY_IMAGE:builder as deps
+RUN mkdir -p /src/packages
 
 FROM hub.nexdev.net/base/dotnet/core/sdk:9.0-alpine AS builder
 
 WORKDIR /src
 
 ENV NUGET_PACKAGES=/src/packages
-# COPY --from=deps $NUGET_PACKAGES/. $NUGET_PACKAGES/
+COPY --from=deps $NUGET_PACKAGES/. $NUGET_PACKAGES/
+
 
 COPY ./Fanex.Chart.Service/Fanex.Chart.Business ./Fanex.Chart.Business
 COPY ./Fanex.Chart.Service/Fanex.Chart.Service/Fanex.Chart.Service.csproj ./Fanex.Chart.Service/Fanex.Chart.Service.csproj
@@ -25,6 +26,19 @@ FROM hub.nexdev.net/base/dotnet/core/aspnet:9.0-nap-mail-core
 
 ENV TZ="America/La_Paz"
 ENV COMPlus_EnableDiagnostics=0
+
+# Install required dependencies
+RUN apt-get update && apt-get install -y \
+    libgdiplus \
+    libfontconfig1 \
+    libfreetype6 \
+    libx11-6 \
+    libxext6 \
+    libxrender1 \
+    libjpeg62-turbo \
+    libpng16-16 \
+    libicu-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 
 WORKDIR /app
