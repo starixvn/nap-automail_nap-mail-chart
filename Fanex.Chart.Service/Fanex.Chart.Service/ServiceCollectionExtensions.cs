@@ -12,7 +12,7 @@ namespace Fanex.Chart.Service;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection Services { get; set; }
+    public static IServiceCollection Services { get; set; } = new ServiceCollection();
 
     public static void AddConfiguration(this IServiceCollection services)
     {

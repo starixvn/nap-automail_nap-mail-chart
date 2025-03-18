@@ -17,12 +17,12 @@ public class ChartServiceImp(Log log) : ChartService
 {
     public string Execute()
     {
-        // Dữ liệu mẫu (dựa trên biểu đồ)
-        var sbValues = new double[] { 4.7, 4.3, 2.5, 3.4, 2.4, 0.9, 1.7, 5.7, 2.4, 1.9, 1.9 }; // SB
-        var othersValues = new double[] { 0.1, 0.2, 0.1, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.1 }; // Others
-        var totalValues = new double[] { 4.8, 4.5, 2.6, 3.6, 2.5, 1.0, 1.9, 7.9, 2.5, 2.0, 2.0 }; // Total
+        // Sample data (based on chart)
+        var sbValues = new[] { 4.7, 4.3, 2.5, 3.4, 2.4, 0.9, 1.7, 5.7, 2.4, 1.9, 1.9 }; // SB
+        var othersValues = new[] { 0.1, 0.2, 0.1, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.1 }; // Others
+        var totalValues = new[] { 4.8, 4.5, 2.6, 3.6, 2.5, 1.0, 1.9, 7.9, 2.5, 2.0, 2.0 }; // Total
 
-        // Tạo series cho biểu đồ
+        // Create series for the chart
         var series = new ISeries[]
         {
             new ColumnSeries<double>
@@ -46,26 +46,26 @@ public class ChartServiceImp(Log log) : ChartService
             }
         };
 
-        // Tạo trục X và Y
+        // Create X and Y axes
         var xAxes = new Axis[]
         {
-            new Axis
+            new()
             {
-                Labels = new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11" },
+                Labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"],
                 Name = "Date"
             }
         };
 
         var yAxes = new Axis[]
         {
-            new Axis
+            new()
             {
                 Labeler = value => value.ToString("N1") + "m",
                 Name = "Value"
             }
         };
 
-        // Tạo một SKCartesianChart để vẽ biểu đồ
+        // Create an SKCartesianChart to draw the chart
         using var bitmap = new SKBitmap(800, 600);
         using var canvas = new SKCanvas(bitmap);
 
@@ -87,13 +87,13 @@ public class ChartServiceImp(Log log) : ChartService
         var path = $"{AppConfigService.AppConfig.Path}/chart.png";
         try
         {
-            // Vẽ biểu đồ lên canvas
+            // Draw chart on canvas
             chart.DrawOnCanvas(canvas);
 
-            // Vẽ biểu đồ lên canvas
+            // Draw chart on canvas
             chart.DrawOnCanvas(canvas);
 
-            // Lưu bitmap thành file PNG
+            // Save bitmap as PNG file
             using var image = SKImage.FromBitmap(bitmap);
             using var data = image.Encode(SKEncodedImageFormat.Png, 100);
 
