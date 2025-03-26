@@ -2,7 +2,6 @@
 using Fanex.MailDelivery.Core.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Fanex.Chart.Business.Services;
 
@@ -65,24 +64,6 @@ public class MainServiceImp(
         }
 
         var images = new List<string>();
-        var rawData = repository.QueryRawData();
-        var reportIndex = 1;
-        rawData.GroupBy(g => new { g.ProductGroup })
-            .ToList()
-            .ForEach(group =>
-            {
-                var data = transformService.Execute(group.ToList());
-                var excelPath = excelService.Export(group.Key.ProductGroup, data, reportIndex);
-                reportIndex++;
-
-                var lastRow = excelService.LastRowIndex;
-                var image = AppConfigService.AppConfig.Image[group.Key.ProductGroup];
-                image.LastRow = lastRow;
-                image.CropHeight = lastRow * image.HeightPerRow + image.AdjustHeight;
-
-                var imagePath = imageService.ExportImage(excelPath, dateService.WinlostDate, "DCWL", image);
-                images.Add(imagePath);
-            });
 
         var chartPath = chartService.Execute();
         if (!string.IsNullOrEmpty(chartPath))

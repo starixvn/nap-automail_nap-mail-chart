@@ -13,7 +13,7 @@ public class MessageServiceImp(LetstalkClientService letstalkService) : MessageS
 {
     public bool Send(List<string> files)
     {
-        var messageSubject = string.Empty;
+        var messageSubject = "CWL Yellow Level Outcome Report";
         var messageContent = string.Empty;
         var letstalkAttachments = CreateAttachments(files);
         var letstalkModel = CreateLetstalkMessageModel(messageSubject, messageContent, letstalkAttachments);
